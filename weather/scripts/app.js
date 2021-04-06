@@ -4,6 +4,7 @@ const details = document.querySelector(".details");
 const time = document.querySelector(".time");
 const icon = document.querySelector(".icon img");
 
+
 function updateUI(data) {
     const { cityDets, weather } = data;
 
@@ -27,6 +28,9 @@ function updateUI(data) {
             <span>&deg;C</span>
         </div>`;
 
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none")
+    }
 
 };
 
@@ -36,17 +40,26 @@ const updateCity = async (city) => {
     return { cityDets, weather };
 };
 
-card.classList.add("d-none");
+
+//event listener
 cityForm.addEventListener("submit", e => {
     e.preventDefault();
+    card.classList.add("d-none");
     card.classList.remove("d-none");
     const city = cityForm.city.value.trim();
     cityForm.reset();
+    localStorage.setItem("city", city);
     updateCity(city)
-        .then(data => {
-            console.log(data);
-            updateUI(data);
-        })
+        .then(data => updateUI(data))
         .catch(err => console.log(err));
 
+
 });
+
+//local storage
+if (localStorage.getItem("city")) {
+    const cit = localStorage.getItem("city");
+    updateCity(cit)
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+};
