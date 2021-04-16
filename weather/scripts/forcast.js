@@ -1,4 +1,4 @@
-const key = "fwYkeGtccQvRLmSJgnyfQANVBsLAuGpR";
+const key = "CAFxftGp7YPxxwkI3Tm0lbjR6IMDbCDA";
 
 //An asynchronous fucntion to get city from Accuweather using API
 const getCity = async (city) => {
